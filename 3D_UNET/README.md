@@ -12,7 +12,7 @@ unet3d = Model(inputs=model_input, outputs=conv_out, name='unet3d')
 ```
 
 ### Network Architecture
-![3D UNet](3D UNet.jpg)
+![3D UNet](3d_unet.jpg)
 
 **Model Summary**
 ```
