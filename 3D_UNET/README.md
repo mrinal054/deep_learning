@@ -11,6 +11,9 @@ For details, check `3D_UNET.ipynb`.
 unet3d = Model(inputs=model_input, outputs=conv_out, name='unet3d')
 ```
 
+### Network Architecture
+![3D UNet](3D UNet.jpg)
+
 **Model Summary**
 ```
 Model: "unet3d"
