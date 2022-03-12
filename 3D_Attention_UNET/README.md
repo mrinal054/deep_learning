@@ -12,3 +12,4 @@ In addition, a function called `get_data_raw_sample_aug` for on-the-fly
 ### Network Architecture
 ![3d_attention_unet](3d_attention_unet.jpg)
 
+[Link](https://ieeexplore.ieee.org/document/9182931)
