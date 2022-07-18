@@ -156,7 +156,7 @@ class UNet(nn.Module):
         for i, module in enumerate(self.down_block):
             x = module(x)
             for_concat.append(x)
-            if i < len(features) - 1: # for last down block, no need of downsampling
+            if i < len(self.features) - 1: # for last down block, no need of downsampling
                 x = self.max_pool(x)
         
         for_concat = for_concat[0:-1] # removing the last element as it will not be used for concatenation
