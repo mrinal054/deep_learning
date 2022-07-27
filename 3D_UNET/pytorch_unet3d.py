@@ -199,11 +199,6 @@ class UNet3D (nn.Module):
         print('Out: ', out.size())
         
         return(out)
-    
-# def weight_init(m):
-#     if isinstance(m, nn.Conv2d) or isinstance(m, nn.Linear):
-#         nn.init.xavier_uniform_(m.weight, gain=nn.init.calculate_gain('relu'))
-#         nn.init.zeros_(m.bias)
         
 # Test model         
 if __name__ == "__main__":
@@ -213,8 +208,6 @@ if __name__ == "__main__":
     
     model = UNet3D(input_shape, base_feature, out_channel=2, multiplier=2, 
     norm='batch', in_activation='relu', out_activation='softmax', dropout=0.15, pad='same')
-    
-    # model.apply(weight_init)
     
     out = model(img)
     
