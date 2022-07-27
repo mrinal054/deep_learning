@@ -113,7 +113,7 @@ class UNet3D (nn.Module):
         self.dropout = nn.Dropout3d(p=dropout)
         self.max_pool = nn.MaxPool3d(kernel_size=2, stride=2) 
         
-        # Level zero
+        # Level zero (note: suffix 'e' means encoder and 'd' means decoder)
         self.conv_e0 = conv_block(self.input_shape[1], self.base_feature, self.multiplier, 
                                  self.norm, self.in_activation, self.pad)
         # Level one 
@@ -133,6 +133,14 @@ class UNet3D (nn.Module):
         self.upconv_2 = up_conv(in_channel_decoder_2, self.base_feature*16, kernel=2, stride=2, pad=0)
         self.conv_d2 = conv_block(self.base_feature*(16 + 8), self.base_feature*8, 1, # multiplier=1 
                                  self.norm, self.in_activation, self.pad)
+        
+        '''
+        Explanation of self.base_feature*(16 + 8):
+            Input to conv_d2 is concat(upconv_2, conv_e2)
+            No. of output_channels in upconv_2 = self.base_feature * 16
+            No. of output_channels in conv_e2 = self.base_feature * 8
+            So, no. of input_channels in conv_d2 = self.base_feature (16 + 8)
+        '''
         
         # Level one
         self.upconv_1 = up_conv(base_feature*8, self.base_feature*8, kernel=2, stride=2, pad=0)  
