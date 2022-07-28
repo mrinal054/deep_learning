@@ -88,7 +88,8 @@ class UNet3D (nn.Module):
         multiplier: (int) Whether to double no. of out channels. It can be either 1 or 2.
         norm: (str) Normalization. Keyword: 'batch', or 'instance'
         in_activation: (str) Activation function. Keyword: 'relu', 'leaky', or 'elu'
-        out_activation: (str) Activation function applied to output layer. (e.g. 'softmax')
+        out_activation: (str) Activation function applied to output layer. (e.g. 'softmax' or None)
+                If out_activation=None, then no activation will be applied to the output layer
         dropout: (float) Dropout
         pad: (str) Padding. Either 'same' or 'valid'
              
@@ -153,12 +154,13 @@ class UNet3D (nn.Module):
                                  self.norm, self.in_activation, self.pad)
         
         # Output
-        self.out = nn.Conv3d(self.base_feature*2, self.out_channel, kernel_size=1, stride=1, padding=self.pad)
-
-        # self.out = nn.Sequential(
-        #     nn.Conv3d(self.base_feature*2, self.out_channel, kernel_size=1, stride=1, padding=self.pad),
-        #     activations(self.out_activation)
-        #     )
+        if self.out_activation is None:
+            self.out = nn.Conv3d(self.base_feature*2, self.out_channel, kernel_size=1, stride=1, padding=self.pad)
+        else:
+            self.out = nn.Sequential(
+                nn.Conv3d(self.base_feature*2, self.out_channel, kernel_size=1, stride=1, padding=self.pad),
+                activations(self.out_activation)
+                )
         
     def forward(self, x):
         # Level zero
@@ -209,16 +211,15 @@ class UNet3D (nn.Module):
         print('Out: ', out.size())
         
         return(out)
-    
 
 # Test model         
 if __name__ == "__main__":
     base_feature = 32
     img = torch.rand(3, 1, 64, 64, 64) # batch_size, channel, height, width
-    input_shape = img.size()
+    input_feature = img.size()[1]
     
-    model = UNet3D(input_shape[1], base_feature, out_channel=2, multiplier=2, 
-    norm='batch', in_activation='relu', out_activation='softmax', dropout=0.15, pad='same')
+    model = UNet3D(input_feature, base_feature, out_channel=2, multiplier=2, 
+    norm='batch', in_activation='relu', out_activation=None, dropout=0.15, pad='same')
     
     out = model(img)
     
