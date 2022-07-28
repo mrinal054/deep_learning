@@ -77,12 +77,12 @@ def center_crop_and_concat(encoder_tensor, decoder_tensor):
 
 class UNet3D (nn.Module):
     def __init__(
-            self, input_shape, base_feature, out_channel:int, multiplier: int, norm: str,  
+            self, input_channel, base_feature, out_channel:int, multiplier: int, norm: str,  
             in_activation: str, out_activation: str, dropout:float, pad='same'):
         '''
         Input
         ------
-        input_shape: batch_size x channel x depth x height x width
+        input_channel: (int) No. of input channels of the original data. (e.g. 1)
         base_feature: (int) No. of out channels of the first convolution. (e.g. 32)
         out_channel: (int) No. of channels of final output (e.g. 2)
         multiplier: (int) Whether to double no. of out channels. It can be either 1 or 2.
@@ -99,7 +99,7 @@ class UNet3D (nn.Module):
         
         super(UNet3D, self).__init__()
         
-        self.input_shape = input_shape
+        self.input_channel = input_channel
         self.base_feature = base_feature
         self.out_channel = out_channel
         self.multiplier = multiplier
@@ -114,7 +114,7 @@ class UNet3D (nn.Module):
         self.max_pool = nn.MaxPool3d(kernel_size=2, stride=2) 
         
         # Level zero (note: suffix 'e' means encoder and 'd' means decoder)
-        self.conv_e0 = conv_block(self.input_shape[1], self.base_feature, self.multiplier, 
+        self.conv_e0 = conv_block(self.input_channel, self.base_feature, self.multiplier, 
                                  self.norm, self.in_activation, self.pad)
         # Level one 
         in_channel_encoder_1 = self.base_feature * multiplier
@@ -153,10 +153,12 @@ class UNet3D (nn.Module):
                                  self.norm, self.in_activation, self.pad)
         
         # Output
-        self.out = nn.Sequential(
-            nn.Conv3d(self.base_feature*2, self.out_channel, kernel_size=1, stride=1, padding=self.pad),
-            activations(self.out_activation)
-            )
+        self.out = nn.Conv3d(self.base_feature*2, self.out_channel, kernel_size=1, stride=1, padding=self.pad)
+
+        # self.out = nn.Sequential(
+        #     nn.Conv3d(self.base_feature*2, self.out_channel, kernel_size=1, stride=1, padding=self.pad),
+        #     activations(self.out_activation)
+        #     )
         
     def forward(self, x):
         # Level zero
@@ -207,14 +209,15 @@ class UNet3D (nn.Module):
         print('Out: ', out.size())
         
         return(out)
-        
+    
+
 # Test model         
 if __name__ == "__main__":
     base_feature = 32
     img = torch.rand(3, 1, 64, 64, 64) # batch_size, channel, height, width
     input_shape = img.size()
     
-    model = UNet3D(input_shape, base_feature, out_channel=2, multiplier=2, 
+    model = UNet3D(input_shape[1], base_feature, out_channel=2, multiplier=2, 
     norm='batch', in_activation='relu', out_activation='softmax', dropout=0.15, pad='same')
     
     out = model(img)
