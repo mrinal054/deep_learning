@@ -6,6 +6,7 @@ Created on Sat Jul 30 11:51:42 2022
 import torch.nn as nn
 import torch 
 
+#%%
 class WCELoss(nn.Module):
 
     def __init__(self, weights):
@@ -63,10 +64,8 @@ class WCELoss(nn.Module):
         
         mean_wce_loss = torch.mean(wce_loss)
         
-        
         Example
         ------------
-        
         y_true = torch.randn(3, 4, 64, 64, 64)
         y_pred = torch.randn(3, 4, 64, 64, 64)
 
@@ -76,7 +75,6 @@ class WCELoss(nn.Module):
         loss = WCELoss([1, 100, 150, 1.])            
 
         wce_loss = loss(y_pred, y_true)
-        
         '''
         
         self.loss = nn.CrossEntropyLoss(reduction='none')
@@ -85,7 +83,6 @@ class WCELoss(nn.Module):
         
         self.weights = torch.tensor(weights) # dtype=torch.float32
         
-
     def forward(self, y_pred, y_true, device: str=None):
         
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
