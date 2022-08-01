@@ -90,4 +90,20 @@ class WCELoss(nn.Module):
         
         self.reshaped_weights = weights.view(reshape_dims) # for num_classes=4, size is now torch.Size([1, 4, 1, 1, 1])
         
+    def forward(self, y_pred, y_true, device: str=None):
+        
+        y_pred = y_pred.type(torch.float32) # Cast as float32
+        
+        y_true = y_true.type(torch.float32).to(device) # Cast as float32
+        
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        
+        weighted_y_true = torch.sum(self.reshaped_weights.to(device) * y_true, dim = 1) 
+        
+        ce_loss = self.loss(y_pred, y_true)
+        
+        wce_loss = ce_loss * weighted_y_true
+        
+        return torch.mean(wce_loss).to(device) # return the mean value
+        
 
