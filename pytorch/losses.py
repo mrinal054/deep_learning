@@ -21,3 +21,11 @@ class WCELoss(nn.Module):
         which applies softmax before calculating the loss. So, a softmax actiation in
         the final layer will result in an incorrect loss value.  
         
+        Input
+        --------
+        weights: (tuple or list) weight for each class. e.g. [1, 150.] when num_classes=2
+        
+        Output
+        --------
+        Returns weighted cross-entropy loss        
+        
