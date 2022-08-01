@@ -12,3 +12,12 @@ class WCELoss(nn.Module):
 
         super(WCELoss, self).__init__()
         
+        '''
+        It calculates weighted cross-entropy loss.
+        
+        Warning
+        --------
+        Do not use softmax in the final layer. WCELoss utilizes pytorch's nn.CrossEntropyLoss(),
+        which applies softmax before calculating the loss. So, a softmax actiation in
+        the final layer will result in an incorrect loss value.  
+        
