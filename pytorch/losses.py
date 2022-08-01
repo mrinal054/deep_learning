@@ -72,6 +72,5 @@ class WCELoss(nn.Module):
 
         loss = WCELoss([1, 100, 150, 1.])            
 
-        wce_loss = loss(y_pred, y_true)
-        
+        wce_loss = loss(y_pred, y_true)        
         '''
