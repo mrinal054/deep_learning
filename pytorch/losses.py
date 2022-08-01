@@ -62,3 +62,16 @@ class WCELoss(nn.Module):
         
         mean_wce_loss = torch.mean(wce_loss)
         
+        Example
+        ------------        
+        y_true = torch.randn(3, 4, 64, 64, 64)
+        y_pred = torch.randn(3, 4, 64, 64, 64)
+
+        y_true = y_true.type(torch.float32)
+        y_pred = y_pred.type(torch.float32)
+
+        loss = WCELoss([1, 100, 150, 1.])            
+
+        wce_loss = loss(y_pred, y_true)
+        
+        '''
