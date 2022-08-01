@@ -44,3 +44,21 @@ class WCELoss(nn.Module):
         
         weights = torch.tensor(weights) # dtype=torch.float32
         
+        reshaped_weights = weights.view(reshape_dims) # for num_classes=4, size is now torch.Size([1, 4, 1, 1, 1])
+        
+        y_true = torch.randn(3, 4, 64, 64, 64)
+        y_pred = torch.randn(3, 4, 64, 64, 64)
+        
+        y_true = y_true.type(torch.float32)
+        y_pred = y_pred.type(torch.float32)
+        
+        weighted_y_true = torch.sum(reshaped_weights*y_true, dim = 1) 
+        
+        loss = nn.CrossEntropyLoss(reduction='none')
+        
+        ce_loss = loss(y_pred, y_true)
+        
+        wce_loss = ce_loss * weighted_y_true
+        
+        mean_wce_loss = torch.mean(wce_loss)
+        
