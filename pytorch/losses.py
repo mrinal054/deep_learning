@@ -32,7 +32,6 @@ class WCELoss(nn.Module):
         
         Expanation
         --------------
-        
         weights = [1, 100, 150, 1.]
         
         # Get dimensions to reshape the weights
