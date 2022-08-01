@@ -74,3 +74,20 @@ class WCELoss(nn.Module):
 
         wce_loss = loss(y_pred, y_true)        
         '''
+        
+        self.loss = nn.CrossEntropyLoss(reduction='none')
+        
+        # Get dimensions to reshape the weights
+        # E.g. if weights = [1, 100, 150, 1.], then reshape dims = [1, 4, 1, 1, 1] 
+        # Here 4 is no. of channels/classes or len(weights). All are same.
+        # 1s are for batch, height, width, and depth
+        
+        num_classes = len(weights)
+        
+        reshape_dims = [1] + [num_classes] + [1,1,1]
+        
+        weights = torch.tensor(weights) # dtype=torch.float32
+        
+        self.reshaped_weights = weights.view(reshape_dims) # for num_classes=4, size is now torch.Size([1, 4, 1, 1, 1])
+        
+
