@@ -9,6 +9,6 @@ Currently has -
   
 * utils 
   |--losses.py 
-         |--WCELoss: It calculates weighted cross-entropy loss 
+       |--WCELoss: It calculates weighted cross-entropy loss 
       
 <pre>
