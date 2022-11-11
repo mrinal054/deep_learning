@@ -1,12 +1,14 @@
 Currently has - 
 
-* models
-  |--Attention_UNet2d
-  |--Logistic_Regression
-  |--UNet2d
-  |--UNet3d
+* models <br>
+  |--Attention_UNet2d <br>
+  |--Logistic_Regression <br>
+  |--UNet2d <br>
+  |--UNet3d <br>
   
-* utils
-  |--losses.py
+* utils <br>
+  |--losses.py <br>
+      |--WCELoss: It calculates weighted cross-entropy loss <br>
+      
   
 
