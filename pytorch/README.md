@@ -1,3 +1,4 @@
+<pre>
 Currently has - 
 
 * models <br>
@@ -8,8 +9,7 @@ Currently has -
   
 * utils <br>
   |--losses.py <br>
-$~~~~~~~~$ |--WCELoss: It calculates weighted cross-entropy loss <br>
+         |--WCELoss: It calculates weighted cross-entropy loss <br>
       
-      
-  
+<pre>
 
