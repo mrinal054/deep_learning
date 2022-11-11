@@ -1,7 +1,7 @@
 <pre>
 Currently has - 
 
-* models <br>
+* models 
   |-- Attention_UNet2d <br>
   |-- Logistic_Regression <br>
   |-- UNet2d <br>
