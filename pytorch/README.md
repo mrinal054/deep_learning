@@ -12,4 +12,3 @@ Currently has -
          |--WCELoss: It calculates weighted cross-entropy loss 
       
 <pre>
-
