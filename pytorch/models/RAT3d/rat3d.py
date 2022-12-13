@@ -106,8 +106,7 @@ class attention_block(nn.Module):
         self.result = nn.Conv3d(F_int, shape, kernel_size=1, padding='same')
         
         self.result_bn = nn.BatchNorm3d(shape)
-        
-        
+                
     def forward(self, g, x):
         theta_x = self.theta_x(x)
         phi_g = self.phi_g(g)
@@ -124,7 +123,6 @@ class attention_block(nn.Module):
         
         return result_bn
            
-    
 def up_conv(in_channel, out_channel, kernel, stride, pad=0):
     ''' It performs up sampling that is needed in the decoder '''
     
@@ -144,8 +142,7 @@ def center_crop_and_concat(encoder_tensor, decoder_tensor):
     Output
     ------
     Concatenation of cropped encoder tensor and decoder tensor
-    '''
-    
+    '''  
     encoder_size = encoder_tensor.size()[2:] # depth, height, and width only
     decoder_size = decoder_tensor.size()[2:] # depth, height, and width only
     
