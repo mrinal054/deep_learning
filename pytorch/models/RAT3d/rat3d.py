@@ -6,7 +6,6 @@ RATUNet3D - Tailed residual attention UNet3D
 
 @author: mrinal
 """
-
 import torch
 import torch.nn as nn
 
