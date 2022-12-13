@@ -157,8 +157,6 @@ def center_crop_and_concat(encoder_tensor, decoder_tensor):
     return torch.cat([cropped_encoder_tensor, decoder_tensor], 1)
 
 
-        
-
 class RATUNet3D(nn.Module):
     def __init__(
             self, input_shape, base_feature, out_channel:int, multiplier: int, norm: str,  
