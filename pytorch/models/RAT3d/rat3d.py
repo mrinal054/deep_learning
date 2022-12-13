@@ -303,10 +303,10 @@ class RATUNet3D(nn.Module):
 #         nn.init.zeros_(m.bias)
 
 
-# Test model    
-from torchsummary import summary     
-            
+# Test model         
 if __name__ == "__main__":
+    from torchsummary import summary     
+    
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     base_feature = 32
