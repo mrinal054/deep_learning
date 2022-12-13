@@ -2,6 +2,8 @@
 """
 Created on Sun Aug 21 21:51:29 2022
 
+RATUNet3D - Tailed residual attention UNet3D
+
 @author: mrinal
 """
 
