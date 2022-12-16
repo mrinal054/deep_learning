@@ -6,6 +6,7 @@ Currently has -
   |-- Logistic_Regression
   |-- UNet2d 
   |-- UNet3d 
+  |-- RAT-UNet3d
   
 * utils 
   |--losses.py 
