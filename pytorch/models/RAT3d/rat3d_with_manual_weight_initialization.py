@@ -47,3 +47,18 @@ def weight_init(m):
             stage 2 output_channel = stage 1 output_channel x multiplier. Finally,
             it applies residual connection. '''
         
+        # Get output channels for the 2nd stage
+        stage2_out_channel = multiplier * stage1_out_channel
+        
+        # Apply conv --> normalization--> activation (cna)
+        self.double_cna = nn.Sequential(
+            # Stage 1
+            nn.Conv3d(in_channel, stage1_out_channel, kernel_size=3, padding=pad),
+            normalization(norm, stage1_out_channel),
+            activations(activation),
+            
+            # Stage 2
+            nn.Conv3d(stage1_out_channel, stage2_out_channel, kernel_size=3, padding=pad),
+            normalization(norm, stage2_out_channel),    
+            # No activation right now                
+            )
