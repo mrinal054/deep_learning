@@ -62,3 +62,10 @@ def weight_init(m):
             normalization(norm, stage2_out_channel),    
             # No activation right now                
             )
+        self.double_cna.apply(weight_init) # initializing with truncated normal
+        
+        # Resnet Connection
+        self.shortcut = nn.Sequential(
+            nn.Conv3d(stage2_out_channel, stage2_out_channel, kernel_size=1, stride=1, padding='same', bias=True),
+            normalization(norm, stage2_out_channel),
+            )
