@@ -8,7 +8,7 @@ Currently has -
   |-- UNet3d 
   |-- RAT-UNet3d
       |-- rat3d.py
-      |-- rat3d_with_manual_weight_initialization.py
+      |-- rat3d_with_manual_weight_initialization.py: Weights are manually assigned. 
   
 * utils 
   |--losses.py 
