@@ -2,9 +2,8 @@
 RATUNet3D - Tailed residual attention UNet3D
 @author: mrinal
 
-Weights are assigned for individual conv3d layers and conv3dtranspose layers
+Weights are manually assigned for individual conv3d layers and conv3dtranspose layers
 """
-
 import torch
 import torch.nn as nn
 
