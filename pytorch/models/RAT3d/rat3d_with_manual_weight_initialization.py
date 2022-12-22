@@ -32,4 +32,10 @@ def weight_init_keras_default(m):
         nn.init.zeros_(m.bias)
         
  
+# Weight initialization with truncated normal
+def weight_init(m):
+    if isinstance(m, nn.Conv3d) or isinstance(m, nn.ConvTranspose3d):
+        torch.nn.init.trunc_normal_(m.weight, std=0.1)
+        m.bias.data.zero_()
         
+ 
