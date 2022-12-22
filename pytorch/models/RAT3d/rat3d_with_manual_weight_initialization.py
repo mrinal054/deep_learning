@@ -206,8 +206,7 @@ class RA2UNet3D(nn.Module):
         Output
         -------
         Output tensor
-        '''
-        
+        '''        
         super(RA2UNet3D, self).__init__()
         
         if multiplier not in [1, 2]: raise ValueError('value of multiplier can only be 1 or 2')
