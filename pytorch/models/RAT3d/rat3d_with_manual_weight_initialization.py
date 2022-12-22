@@ -25,5 +25,11 @@ def normalization(norm: str, n_channel):
     elif norm == None: pass # do nothing
     else: raise ValueError('Wrong keyword for normalization') 
         
+# Weight initialization with keras default value
+def weight_init_keras_default(m):
+    if isinstance(m, nn.Conv3d) or isinstance(m, nn.ConvTranspose3d):
+        nn.init.xavier_uniform_(m.weight, gain=nn.init.calculate_gain('relu'))
+        nn.init.zeros_(m.bias)
         
+ 
         
