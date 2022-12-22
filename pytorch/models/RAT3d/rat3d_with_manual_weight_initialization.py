@@ -38,4 +38,12 @@ def weight_init(m):
         torch.nn.init.trunc_normal_(m.weight, std=0.1)
         m.bias.data.zero_()
         
- 
+ class conv_block(nn.Module):
+
+    def __init__(self, in_channel, stage1_out_channel, multiplier: int, norm: str, activation, pad='same'):
+        super(conv_block, self).__init__()
+        
+        ''' It performs conv-norm-activation in two stages. For the second stage,
+            stage 2 output_channel = stage 1 output_channel x multiplier. Finally,
+            it applies residual connection. '''
+        
