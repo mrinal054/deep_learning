@@ -17,3 +17,13 @@ def activations(activation: str):
     elif activation == 'softmax': return nn.Softmax(dim=1)
     else: raise ValueError('Wrong keyword for activation')
       
+def normalization(norm: str, n_channel):
+    ''' Choose type of normalization '''
+    
+    if norm == 'batch': return nn.BatchNorm3d(n_channel)
+    elif norm == 'instance': return nn.InstanceNorm3d(n_channel)
+    elif norm == None: pass # do nothing
+    else: raise ValueError('Wrong keyword for normalization') 
+        
+        
+        
