@@ -1,29 +1,22 @@
 import tensorflow as tf
 import tensorflow.keras.backend as K
+  
+  
+#%%
+def weighted_cce_loss(y_true, y_pred, num_classes=2, loss_weights = [1, 150.0]):
+    y_true = tf.convert_to_tensor(y_true, dtype=tf.float32)
+    y_pred = tf.convert_to_tensor(y_pred, dtype=tf.float32)
+    
+    cce = tf.keras.losses.CategoricalCrossentropy()
+    cce_loss = cce(y_true, y_pred)
 
-def dice_coef(y_true, y_pred, const=K.epsilon()):
-    '''
-    Sørensen–Dice coefficient for 2-d samples.
+    weighted_loss = tf.reshape(tf.constant(loss_weights), [1, 1, num_classes]) # Format to the right size
     
-    Input
-    ----------
-        y_true, y_pred: predicted outputs and targets.
-        const: a constant that smooths the loss gradient and reduces numerical instabilities.
-        
-    '''
+    #weighted_loss = tf.cast(weighted_loss, float32)
     
-    # flatten 2-d tensors
-    y_true_pos = tf.reshape(y_true, [-1])
-    y_pred_pos = tf.reshape(y_pred, [-1])
+    weighted_one_hot = tf.reduce_sum(weighted_loss*y_true, axis = -1)
+    cce_loss = cce_loss * weighted_one_hot
     
-    # get true pos (TP), false neg (FN), false pos (FP).
-    true_pos  = tf.reduce_sum(y_true_pos * y_pred_pos)
-    false_neg = tf.reduce_sum(y_true_pos * (1-y_pred_pos))
-    false_pos = tf.reduce_sum((1-y_true_pos) * y_pred_pos)
-    
-    # 2TP/(2TP+FP+FN) == 2TP/()
-    coef_val = (2.0 * true_pos + const)/(2.0 * true_pos + false_pos + false_neg)
-    
-    return coef_val
-  
-  
+    return tf.reduce_mean(cce_loss)
+
+
