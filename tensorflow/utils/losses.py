@@ -19,4 +19,15 @@ def weighted_cce_loss(y_true, y_pred, num_classes=2, loss_weights = [1, 150.0]):
     
     return tf.reduce_mean(cce_loss)
 
+#%%
+def sce_loss(y_true, y_pred):
+    y_true = tf.image.convert_image_dtype(y_true, tf.float32)
+    y_pred = tf.image.convert_image_dtype(y_pred, tf.float32)
+    
+    # Softmax cross-entropy loss
+    sce_loss = tf.nn.softmax_cross_entropy_with_logits(logits=y_pred, labels=y_true)
+    
+    return sce_loss
 
+  
+ 
