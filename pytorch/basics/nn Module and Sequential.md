@@ -48,3 +48,13 @@ print('Input tensor shape:', x.shape)
 print('Output tensor shape:', out.shape)
 print('Output:\n', out) 
 ```
+Output:
+```
+Input tensor shape: torch.Size([1, 3, 4, 4])
+Output tensor shape: torch.Size([1, 1, 4, 4])
+Output:
+ tensor([[[[0.3101, 0.4306, 0.3305, 0.6101],
+          [0.4712, 0.3362, 0.5149, 0.4299],
+          [0.3823, 0.4192, 0.4802, 0.6037],
+          [0.4182, 0.4826, 0.6056, 0.4972]]]], grad_fn=<SigmoidBackward0>)
+```
