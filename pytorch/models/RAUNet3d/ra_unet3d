@@ -77,3 +77,51 @@ def gating_signal(in_channel, out_channel, activation: str, norm=None):
         activations(activation),
         )
 
+
+class attention_block(nn.Module):
+    def __init__(self, F_int, shape):
+        super(attention_block, self).__init__()
+        
+        self.F_int = F_int
+        
+        self.theta_x = nn.Conv3d(F_int, F_int, kernel_size=2, stride=2, padding=0, bias=True)
+        
+        self.phi_g = nn.Conv3d(F_int, F_int, kernel_size=1, padding='same')
+        
+        self.upsample_g = nn.ConvTranspose3d(F_int, F_int, kernel_size=3, stride=1, padding=1)
+        
+        # Here is the concatenation step
+        
+        self.act_xg = nn.ReLU(inplace=True)
+        
+        self.psi = nn.Conv3d(F_int, 1, kernel_size=1, stride=1, padding=0, bias=True)
+        
+        self.sigmoid_xg = nn.Sigmoid()
+        
+        self.upsample_psi = nn.Upsample(scale_factor=2)
+        
+        # Here is repeat elements. upsample_psi has 1 ch only. Repeat it F_int times.
+        
+        # Here is multiplication between x and upsample_psi
+        
+        self.result = nn.Conv3d(F_int, shape, kernel_size=1, padding='same')
+        
+        self.result_bn = nn.BatchNorm3d(shape)
+        
+        
+    def forward(self, g, x):
+        theta_x = self.theta_x(x)
+        phi_g = self.phi_g(g)
+        upsample_g = self.upsample_g(phi_g)        
+        concat_xg = upsample_g + theta_x
+        act_xg = self.act_xg(concat_xg)
+        psi = self.psi(act_xg)
+        sigmoid_xg = self.sigmoid_xg(psi)
+        upsample_psi = self.upsample_psi(sigmoid_xg)
+        upsample_psi = torch.repeat_interleave(upsample_psi, self.F_int, dim=1)
+        y = upsample_psi * x
+        result = self.result(y)
+        result_bn = self.result_bn(result)
+        
+        return result_bn
+           
