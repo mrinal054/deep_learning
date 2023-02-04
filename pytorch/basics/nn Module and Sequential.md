@@ -5,7 +5,7 @@
 * One advantage of `nn.Sequential` is that we don't need to implement the `forward` method.
 
 
-#### Example: nn.Moduel
+#### Example: nn.Module
 
 ```python
 import torch
