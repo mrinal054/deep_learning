@@ -1,1 +1,8 @@
-# temp
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Aug 21 21:51:29 2022
+
+Residual-attention UNet (RAUNet)
+
+@author: mrinal
+"""
