@@ -7,7 +7,7 @@
 
 #### Example: nn.Module
 
-Create a class called `NNModel`.
+Create a class called `NNModule`.
 
 ```python
 import torch
@@ -28,3 +28,23 @@ class NNModule(nn.Module):
 ```
 Now, run this class.
 
+```python
+# Set seed        
+seed = 42
+torch.manual_seed(seed)
+torch.cuda.manual_seed(seed)
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False        
+
+# Create a torch with size (batch, C, H, W)        
+x = torch.randn(1, 3, 4, 4)        
+    
+# Run model
+model = NNModule(in_ch=3, out_ch=1, kernel_size=3)
+
+out = model(x)
+
+print('Input tensor shape:', x.shape)
+print('Output tensor shape:', out.shape)
+print('Output:\n', out) 
+```
