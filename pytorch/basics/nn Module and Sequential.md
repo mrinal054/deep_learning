@@ -94,7 +94,9 @@ runner = Run(in_channels=3, out_channels=1, kernel_size=3)
 
 out2 = runner(x)
 
-print('\n\n', out2)
+print('Input tensor shape:', x.shape)
+print('Output tensor shape:', out2.shape)
+print('Output:\n', out2)  
 ```
 Output:
 ```
