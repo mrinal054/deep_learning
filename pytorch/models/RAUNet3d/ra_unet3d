@@ -68,3 +68,12 @@ class conv_block(nn.Module):
         x3 = self.res_activation(x3)
         
         return x3
+
+def gating_signal(in_channel, out_channel, activation: str, norm=None):
+
+    return nn.Sequential(
+        nn.Conv3d(in_channel, out_channel, kernel_size=1, stride=1, padding='same'),
+        normalization(norm, out_channel),
+        activations(activation),
+        )
+
