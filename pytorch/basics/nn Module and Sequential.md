@@ -66,7 +66,7 @@ class Run(NNModule):
     
     def __init__(self, in_channels, out_channels, kernel_size=3):
         
-        super(Run, self).__init__(in_channels, out_channels, kernel_size)
+        super().__init__(in_channels, out_channels, kernel_size)
         
         self.cnn = NNModule(in_channels, out_channels, kernel_size=kernel_size)
         
