@@ -7,6 +7,8 @@
 
 #### Example: nn.Module
 
+Create a class called `NNModel`.
+
 ```python
 import torch
 import torch.nn as nn
@@ -28,3 +30,5 @@ class NNModel(nn.Module):
         
         return x
 ```
+Now, run this class.
+
