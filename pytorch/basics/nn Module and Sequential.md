@@ -75,3 +75,24 @@ class Run(NNModule):
         
         return x   
 ```
+Now, class `Run` to generate output.
+
+```python
+# Set seed        
+seed = 42
+torch.manual_seed(seed)
+torch.cuda.manual_seed(seed)
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False        
+
+# Create a torch with size (batch, C, H, W)        
+x = torch.randn(1, 3, 4, 4)        
+    
+# Run model
+
+runner = Run(in_channels=3, out_channels=1, kernel_size=3)
+
+out2 = runner(x)
+
+print('\n\n', out2)
+```
