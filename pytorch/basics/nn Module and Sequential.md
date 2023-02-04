@@ -58,3 +58,20 @@ Output:
           [0.3823, 0.4192, 0.4802, 0.6037],
           [0.4182, 0.4826, 0.6056, 0.4972]]]], grad_fn=<SigmoidBackward0>)
 ```
+
+We can also create a driver class `Run` that will inherit `NNModule` and will run it.
+
+```python
+class Run(NNModule):
+    
+    def __init__(self, in_channels, out_channels, kernel_size=3):
+        
+        super(Run, self).__init__(in_channels, out_channels, kernel_size)
+        
+        self.cnn = NNModule(in_channels, out_channels, kernel_size=kernel_size)
+        
+    def forward(self, x):
+        x = self.cnn(x)
+        
+        return x   
+```
