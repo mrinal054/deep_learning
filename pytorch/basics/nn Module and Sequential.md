@@ -13,19 +13,15 @@ Create a class called `NNModel`.
 import torch
 import torch.nn as nn
 
-class NNModel(nn.Module):
-    def __init__(self, in_ch, out_ch, kernel_size=3):
-        
-        super(head, self).__init__()
-        
-        self.conv2d = nn.Conv2d(in_ch, out_ch, kernel_size=kernel_size, padding=1)
-        
+class NNModule(nn.Module):
+    
+    def __init__(self, in_ch, out_ch, kernel_size=3):        
+        super(head, self).__init__()        
+        self.conv2d = nn.Conv2d(in_ch, out_ch, kernel_size=kernel_size, padding=1)        
         self.activation = nn.Sigmoid()
         
-    def forward(self, x):
-        
-        x = self.conv2d(x)
-        
+    def forward(self, x):        
+        x = self.conv2d(x)        
         x = self.activation(x)
         
         return x
