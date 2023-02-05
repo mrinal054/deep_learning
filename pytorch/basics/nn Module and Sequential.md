@@ -132,3 +132,18 @@ tensor([[[[0.3673, 0.5683, 0.4027, 0.5690],
 ```
 We can also create a driver class called `Run` to execute `NNSequential`. We can do it in two ways - (1) without inheriting `NNSequential` (i.e. `NNSequential` will not be the parent class of `Run`), and (2) inheriting `NNSequential`.
 
+Way - 1: Without inheriting `NNSequential` 
+```python
+class Run(nn.Module):
+    def __init__(self, in_channels, out_channels, kernel_size=3):
+        
+        super().__init__()
+        
+        self.cnn = NNSequential(in_channels, out_channels, kernel_size=3)      
+                
+    def forward(self, x):
+        
+        x = self.cnn(x)
+        
+        return x
+```
