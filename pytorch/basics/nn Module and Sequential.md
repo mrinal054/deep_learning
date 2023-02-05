@@ -111,3 +111,13 @@ Output:
 #### Example: nn.Module
 First, let's create a class called `NNSequential` that performs sequential operations. 
 
+```pyhon
+class NNSequential(nn.Sequential):
+    def __init__(self, in_ch, out_ch, kernel_size=3):
+        
+        conv2d = nn.Conv2d(in_ch, out_ch, kernel_size=kernel_size, padding=1)
+        
+        activation = nn.Sigmoid()
+        
+        super().__init__(conv2d, activation)
+```
