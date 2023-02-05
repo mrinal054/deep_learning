@@ -97,7 +97,7 @@ Output:
           [0.3182, 0.4594, 0.5090, 0.5513],
           [0.5058, 0.5584, 0.2919, 0.5237]]]], grad_fn=<SigmoidBackward0>)
 ```
-#### Example: nn.Module
+#### Example: nn.Sequential
 First, let's create a class called `NNSequential` that performs sequential operations. 
 
 ```pyhon
