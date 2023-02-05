@@ -66,7 +66,7 @@ class Run(NNModule):
     
     def __init__(self, in_channels, out_channels, kernel_size=3):
         
-        super().__init__(in_channels, out_channels, kernel_size)
+        super().__init__(in_channels, out_channels, kernel_size) # pass parameters for the parent class
         
         self.cnn = NNModule(in_channels, out_channels, kernel_size=kernel_size)
         
@@ -153,7 +153,7 @@ Way-2: Inheriting `NNSequential`
 class Run(NNSequential):
     def __init__(self, in_channels, out_channels, kernel_size=3):
         
-        super().__init__(in_channels, out_channels, kernel_size=3)
+        super().__init__(in_channels, out_channels, kernel_size=3) # pass parameters for the parent class
         
         self.cnn = NNSequential(in_channels, out_channels, kernel_size=3)        
         
