@@ -16,7 +16,7 @@ import torch.nn as nn
 class NNModule(nn.Module):
     
     def __init__(self, in_ch, out_ch, kernel_size=3):        
-        super(head, self).__init__()        
+        super(NNModule, self).__init__()        
         self.conv2d = nn.Conv2d(in_ch, out_ch, kernel_size=kernel_size, padding=1)        
         self.activation = nn.Sigmoid()
         
