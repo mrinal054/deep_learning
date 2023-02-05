@@ -109,4 +109,5 @@ Output:
           [0.5058, 0.5584, 0.2919, 0.5237]]]], grad_fn=<SigmoidBackward0>)
 ```
 #### Example: nn.Module
+First, let's create a class called `NNSequential` that performs sequential operations. 
 
