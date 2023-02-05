@@ -79,9 +79,9 @@ Now, execute class `Run` to generate output.
 
 ```python
 # Run model
-runner = Run(in_channels=3, out_channels=1, kernel_size=3)
+model = Run(in_channels=3, out_channels=1, kernel_size=3)
 
-out2 = runner(x)
+out2 = model(x)
 
 print('Input tensor shape:', x.shape)
 print('Output tensor shape:', out2.shape)
