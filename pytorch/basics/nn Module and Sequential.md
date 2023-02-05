@@ -121,3 +121,6 @@ class NNSequential(nn.Sequential):
         
         super().__init__(conv2d, activation)
 ```
+
+Note that no `forward` method is implemented explicitly. Rather, sequential layers are passed in `super`. So, this class can be used in the following way:
+
