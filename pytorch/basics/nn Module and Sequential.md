@@ -124,3 +124,12 @@ class NNSequential(nn.Sequential):
 
 Note that no `forward` method is implemented explicitly. Rather, sequential layers are passed in `super`. So, this class can be used in the following way:
 
+```python
+x = torch.randn(1, 3, 4, 4)
+
+model = NNSequential(3, 1, 3)
+
+output = model(x)
+
+print(output)
+```
