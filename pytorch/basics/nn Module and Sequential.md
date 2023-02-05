@@ -130,3 +130,5 @@ tensor([[[[0.3673, 0.5683, 0.4027, 0.5690],
           [0.5593, 0.3831, 0.6112, 0.4573],
           [0.5203, 0.6053, 0.7128, 0.5169]]]], grad_fn=<SigmoidBackward0>)
 ```
+We can also create a driver class called `Run` to execute `NNSequential`. We can do it in two ways - (1) without inheriting `NNSequential` (i.e. `NNSequential` will not be the parent class of `Run`), and (2) inheriting `NNSequential`.
+
