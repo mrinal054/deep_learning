@@ -75,7 +75,7 @@ class Run(NNModule):
         
         return x   
 ```
-Now, class `Run` to generate output.
+Now, execute class `Run` to generate output.
 
 ```python
 # Run model
