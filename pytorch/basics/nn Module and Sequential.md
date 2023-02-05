@@ -135,6 +135,7 @@ We can also create a driver class called `Run` to execute `NNSequential`. We can
 Way-1: Without inheriting `NNSequential` 
 ```python
 class Run(nn.Module):
+
     def __init__(self, in_channels, out_channels, kernel_size=3):
         
         super().__init__()
@@ -151,16 +152,31 @@ Way-2: Inheriting `NNSequential`
 
 ```python
 class Run(NNSequential):
+
     def __init__(self, in_channels, out_channels, kernel_size=3):
         
         super().__init__(in_channels, out_channels, kernel_size=3) # pass parameters for the parent class
         
         self.cnn = NNSequential(in_channels, out_channels, kernel_size=3)        
         
-        
     def forward(self, x):
         
         x = self.cnn(x)
         
         return x
+```
+Now, run the following code to execute `Run`:
+```python
+model = Run(in_channels=3, out_channels=1, kernel_size=3)  
+
+output = model(x) 
+
+print(output)
+```
+Output:
+```
+tensor([[[[0.5818, 0.5308, 0.3375, 0.4714],
+          [0.1653, 0.6298, 0.6796, 0.6218],
+          [0.6559, 0.3807, 0.5502, 0.5668],
+          [0.5142, 0.6414, 0.5399, 0.5226]]]], grad_fn=<SigmoidBackward0>)
 ```
