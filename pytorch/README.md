@@ -14,5 +14,8 @@ Currently has -
 * utils 
   |--losses.py 
        |--WCELoss: It calculates weighted cross-entropy loss 
-      
+
+* Basics
+  |--nn Module and Sequential.md
+  
 <pre>
