@@ -10,6 +10,7 @@ Currently has -
       |-- rat3d.py
       |-- rat3d_with_manual_weight_initialization.py: Weights are manually assigned. 
   |-- RAUNet3d
+  |-- R2UNet3d
   
 * utils 
   |--losses.py 
