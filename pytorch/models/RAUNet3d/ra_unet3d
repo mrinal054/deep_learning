@@ -306,11 +306,11 @@ class RAUNet3D(nn.Module):
 #         nn.init.xavier_uniform_(m.weight, gain=nn.init.calculate_gain('relu'))
 #         nn.init.zeros_(m.bias)
 
-'''
-# Test model    
-from torchsummary import summary     
-            
+
+# Test model           
 if __name__ == "__main__":
+    from torchsummary import summary  
+    
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     base_feature = 32
@@ -329,4 +329,4 @@ if __name__ == "__main__":
     out = model(img)
     
     summary(model, input_shape)
-'''
+
