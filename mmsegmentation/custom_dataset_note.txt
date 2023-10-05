@@ -1,0 +1,21 @@
+How to configure custom dataset:
+
+1.1 mmseg/datasets
+	* Create your custom dataset (fu_tissue.py)
+		- We basically register our class here
+
+1.2 mmseg/datasets
+	* Include your class in __init__
+ 
+2.1 configs/__base__/datasets 
+	* Create your config file for your class (fu_tissue_config.py)
+		- We basically configure our dataset class here
+		- For instance, train pipleine, test pipeline, train loader etc.
+
+2.2 configs/(your desired model) (for instance configs/unet)
+	* Modify the model file 
+		- For instance, I modified unet-s5-d16_deeplabv3_4xb4-40k_drive-64x64.py to unet-s5-d16_deeplabv3_4xb4-40k_fu-tissue-64x64_mkd.py
+	* In the code, change the custom dataset config file directory in __base__. 
+		- For instance, intially it was '../_base_/datasets/drive.py'. I changed it to '../_base_/datasets/fu_tissue_config.py'.
+	* This file is actually called by train.py
+	
