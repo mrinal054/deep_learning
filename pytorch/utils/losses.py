@@ -30,7 +30,7 @@ class WCELoss(nn.Module):
         --------
         Returns weighted cross-entropy loss        
         
-        Expanation
+        Explanation
         --------------
         weights = [1, 100, 150, 1.]
         
